@@ -2,25 +2,26 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    entry: "./script.js",
+    entry: "./src/script.js", // Update the entry path to the source folder
     output: {
-        path: path.resolve(__dirname, "public"), // Set the output path to "public"
+        path: path.resolve(__dirname, "public"),
         filename: "bundle.js",
     },
     module: {
         rules: [
+            // CSS rule
             {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"],
             },
+            // Image rule
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 use: [
                     {
                         loader: "file-loader",
                         options: {
-                            name: "[name].[ext]",
-                            outputPath: "images",
+                            name: "images/[name].[ext]",
                         },
                     },
                 ],
@@ -30,7 +31,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, "public", "index.html"),
-            filename: "index.html", // Add this line to specify the output filename
+            filename: "index.html",
         }),
     ],
 };
