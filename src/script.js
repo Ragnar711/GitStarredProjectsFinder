@@ -21,7 +21,7 @@ $(document).ready(function () {
                 var description = $("<p>").text(project.description);
                 var stars = $("<p>").text("Stars: " + project.stargazers_count);
                 var link = $("<a>")
-                    .attr("href", project.html_url)
+                    .attr("href", project.html_url).attr("target", "_blank")
                     .text("View on GitHub");
                 card.append(title, description, stars, link);
                 results.append(card);
