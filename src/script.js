@@ -15,16 +15,28 @@ $(document).ready(function () {
             var projects = response.items;
             var results = $("#results");
             results.empty();
+
+            // Limit the number of projects displayed to 25
+            var projectsToShow = 25;
+            var projectsDisplayed = 0;
+
             projects.forEach(function (project) {
+                if (projectsDisplayed >= projectsToShow) {
+                    return; // Break out of the loop if 25 projects are already displayed
+                }
+
                 var card = $("<div>").addClass("card");
                 var title = $("<h2>").text(project.name);
                 var description = $("<p>").text(project.description);
                 var stars = $("<p>").text("Stars: " + project.stargazers_count);
                 var link = $("<a>")
-                    .attr("href", project.html_url).attr("target", "_blank")
+                    .attr("href", project.html_url)
+                    .attr("target", "_blank")
                     .text("View on GitHub");
                 card.append(title, description, stars, link);
                 results.append(card);
+
+                projectsDisplayed++;
             });
         });
     });
